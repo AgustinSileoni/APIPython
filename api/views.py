@@ -55,8 +55,16 @@ def test_bueno_malo(request):
     else :
         return Response( {"resuldato": "FALSE"},status= status.HTTP_400_BAD_REQUEST)
 
-# Definimos a la función con un POST
-@api_view(['POST'])
+# Juntamos las opciones de crear y pedir los usuarios dependiendo de si es una peticion POST(Crear) o GET(Obtener)
+@api_view(['POST','GET'])
+def accounts_view(request):
+    # Hacemos el caso de un GET y el caso de un POST
+    if request.method == 'GET':
+        return get_accounts(request)
+    else:
+        return create_account(request)
+
+
 def create_account(request):
     # Para usar las forms le pasamos el objeto "request.POST" porque esperamos que sea
     # un form que fue lanzado con un POST
@@ -70,3 +78,9 @@ def create_account(request):
         # Respondemos con los datos del serializer, le pasamos nuestro user y le decimos que es uno solo, y depués nos quedamos con la "data" del serializer
         return Response(serializers.UserSerializer(user, many=False).data, status=status.HTTP_201_CREATED)
     return Response(form.errors, status=status.HTTP_400_BAD_REQUEST)
+
+def get_accounts(request):
+    #Obtenemos todos los usuarios y los serializamos
+    users = serializers.UserSerializer(models.User.objects.all(), many= True).data
+    #Agregamos los datos a la respuesta
+    return Response(users,status=status.HTTP_200_OK)

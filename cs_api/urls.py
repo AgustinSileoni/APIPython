@@ -27,6 +27,6 @@ urlpatterns = [
     path('api/suma', views.test_get_suma, name= "test_get_suma"),
     path('api/suma-mas', views.test_get_suma_mas, name="test_get_suma_mas"),
     path('api/bueno', views.test_bueno_malo, name = "test_bueno_malo"),
-    path('api/accounts', views.create_account, name="create_account"),
+    path('api/accounts', views.accounts_view, name="accounts_view"),
     
 ]
