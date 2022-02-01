@@ -8,6 +8,7 @@ from rest_framework import status
 from api import forms, models, serializers
 
 
+
 # Create your views here.
 # Devolvemos el mapa hello world en forma de JSON (el response utiliza JSON) en la parte del body
 # Devolvemos un codigo 200 de OK en el header
