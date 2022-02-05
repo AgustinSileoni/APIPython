@@ -13,12 +13,16 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from pickle import TRUE
 from unicodedata import name
 from django.contrib import admin
 from django.urls import path
 from api import views
 # Importamos una view especial
 from rest_framework_simplejwt.views import TokenObtainPairView
+
+
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -29,7 +33,7 @@ urlpatterns = [
     path('api/suma', views.test_get_suma, name= "test_get_suma"),
     path('api/suma-mas', views.test_get_suma_mas, name="test_get_suma_mas"),
     path('api/bueno', views.test_bueno_malo, name = "test_bueno_malo"),
-    path('api/accounts', views.accounts_view, name="accounts_view"),
+    path('api/accounts', views.accounts_view, name="token_obtain_pair"),
     path('api/auth/login', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-
+    path('api/accounts/<int:id>', views.user_delete, name="user_delete"),
 ]
