@@ -1,3 +1,4 @@
+from email import message
 from api import constants, models
 from rest_framework.permissions import BasePermission
 
@@ -17,3 +18,14 @@ class IsAdmin(BasePermission):
         # ver si el usuario tiene permiso al tener más de 1 grupo
         # Devuelve True si es admin, False si no lo es
         return request.user.groups.all()[0].name == constants.GROUP_ADMIN
+
+# La clase IsUser es nuestro permiso, que tiene que extender de BasePermission para que sea un permiso
+class IsUser(BasePermission):
+    # Mensaje de error que va a devolver
+    message = "El usuario no es user"
+
+    def has_permission(self, request, view):
+        # Si no tiene grupos le decimos que no de una
+        if not request.user.groups.exists():
+            return False
+        return request.user.groups.all()[0].name == constants.GROUP_USER

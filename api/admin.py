@@ -10,6 +10,7 @@ from django.db.utils import OperationalError
 
 # Register your models here.
 admin.site.register(models.Account)
+admin.site.register(models.Transaction)
 
 #Creamos el grupo de ADMIN
 try:

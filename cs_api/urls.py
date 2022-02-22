@@ -26,14 +26,9 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/test', views.test_get, name='test_get'),
-    path('api/test/<int:id>', views.test_get_path_param, name='test_get_path_param'),
-    path('api/test/query', views.test_get_query_param , name= "test_get_query_param"),
-    path('api/test/body' , views.test_post_body , name= "test_post_body"),
-    path('api/suma', views.test_get_suma, name= "test_get_suma"),
-    path('api/suma-mas', views.test_get_suma_mas, name="test_get_suma_mas"),
-    path('api/bueno', views.test_bueno_malo, name = "test_bueno_malo"),
     path('api/accounts', views.accounts_view, name="token_obtain_pair"),
     path('api/auth/login', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/accounts/<int:id>', views.user_delete, name="user_delete"),
+    path('api/transactions', views.action_transaction , name="create_transaction"),
 ]
+
